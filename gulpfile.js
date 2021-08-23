@@ -1,6 +1,6 @@
 const { src, dest, watch, parallel, series } = require('gulp')
 const concat = require('gulp-concat')
-const scss = require('gulp-sass')
+const sass = require('gulp-sass')
 const browserSync = require('browser-sync').create()
 const uglify = require('gulp-uglify-es').default
 const autoprefixer = require('gulp-autoprefixer')
@@ -46,8 +46,8 @@ function browsersync() {
 }
 
 function styles() {
-   return src('src/scss/style.sass')
-      .pipe(scss({ outputStyle: 'compressed' }))
+   return src('src/sass/style.sass')
+      .pipe(sass({ outputStyle: 'compressed' }))
       .pipe(concat('style.min.css'))
       .pipe(autoprefixer({
          overrideBrowserslist: ['last 10 version']
@@ -66,7 +66,7 @@ function build() {
 }
 
 function watching() {
-   watch(['src/scss/**/*.sass'], styles)
+   watch(['src/sass/**/*.sass'], styles)
    watch(['src/js/**/*.js', '!src/js/main.min.js'], scripts)
    watch("src/*.html").on('change', browserSync.reload)
 }
